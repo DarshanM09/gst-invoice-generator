@@ -1,1 +1,0 @@
-# gst-invoice-generator
