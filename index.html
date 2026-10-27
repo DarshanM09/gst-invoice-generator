@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Invoice Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toolbar no-print">
+    <div>
+      <h1>GST Invoice Generator</h1>
+      <p>Create professional invoices with automatic tax calculations.</p>
+    </div>
+    <div class="actions">
+      <button id="saveCompany" class="secondary">Save Company Details</button>
+      <button id="printInvoice" class="primary">Print / Save PDF</button>
+    </div>
+  </header>
+
+  <main class="app">
+    <aside class="panel no-print">
+      <h2>Company Details</h2>
+
+      <label>Company Name
+        <input id="companyName" placeholder="ABC Technologies Pvt. Ltd.">
+      </label>
+
+      <label>Company GSTIN
+        <input id="companyGstin" maxlength="15" placeholder="15-character GSTIN">
+      </label>
+
+      <label>Company Address
+        <textarea id="companyAddress" rows="3" placeholder="Registered address"></textarea>
+      </label>
+
+      <label>Company State
+        <select id="companyState"></select>
+      </label>
+
+      <label>Company Logo
+        <input id="logoFile" type="file" accept="image/*">
+      </label>
+
+      <label>Company Stamp / Signature
+        <input id="stampFile" type="file" accept="image/*">
+      </label>
+
+      <hr>
+      <h2>Invoice Details</h2>
+
+      <label>Invoice Number
+        <input id="invoiceNumber" value="INV-001">
+      </label>
+
+      <label>Invoice Date
+        <input id="invoiceDate" type="date">
+      </label>
+
+      <label>Customer Name
+        <input id="customerName" placeholder="Customer name">
+      </label>
+
+      <label>Customer GSTIN
+        <input id="customerGstin" maxlength="15" placeholder="Optional">
+      </label>
+
+      <label>Customer Address
+        <textarea id="customerAddress" rows="3" placeholder="Billing address"></textarea>
+      </label>
+
+      <label>Place of Supply / Customer State
+        <select id="customerState"></select>
+      </label>
+
+      <p class="hint">
+        Select the actual place of supply. The tool uses CGST + SGST
+        when the selected states match, and IGST when they differ.
+        Confirm the applicable place-of-supply rules for your transaction.
+      </p>
+    </aside>
+
+    <section class="invoice" id="invoice">
+      <div class="invoice-heading">
+        <div class="company">
+          <img id="logoPreview" class="logo hidden" alt="Company logo">
+          <div>
+            <p class="eyebrow">TAX INVOICE</p>
+            <h2 id="previewCompany">Your Company Name</h2>
+            <p id="previewAddress">Your business address</p>
+            <p><b>GSTIN:</b> <span id="previewGstin">Not entered</span></p>
+          </div>
+        </div>
+
+        <div class="invoice-meta">
+          <p>Invoice No.<br><b id="previewInvoiceNumber">INV-001</b></p>
+          <p>Invoice Date<br><b id="previewInvoiceDate">—</b></p>
+          <p>Tax Type<br><b id="taxType">Select states</b></p>
+        </div>
+      </div>
+
+      <div class="customer-section">
+        <div>
+          <p class="eyebrow">BILL TO</p>
+          <h3 id="previewCustomer">Customer name</h3>
+          <p id="previewCustomerAddress">Customer address</p>
+          <p><b>GSTIN:</b> <span id="previewCustomerGstin">—</span></p>
+        </div>
+        <div class="stamp-section">
+          <img id="stampPreview" class="stamp hidden" alt="Company stamp">
+          <span>Authorized stamp / signature</span>
+        </div>
+      </div>
+
+      <div class="product-controls no-print">
+        <label>Product Category
+          <select id="category">
+            <option>Electronics</option>
+            <option>Clothing / Textiles</option>
+            <option>Food / Groceries</option>
+            <option>Furniture</option>
+            <option>Services</option>
+            <option>Other Goods</option>
+          </select>
+        </label>
+        <button id="addProduct" class="secondary">+ Add Product</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product / Category</th>
+              <th>HSN/SAC</th>
+              <th>Qty</th>
+              <th>Rate (₹)</th>
+              <th>Taxable (₹)</th>
+              <th>GST %</th>
+              <th class="split-tax">CGST (₹)</th>
+              <th class="split-tax">SGST (₹)</th>
+              <th class="integrated-tax">IGST (₹)</th>
+              <th>Total (₹)</th>
+              <th class="no-print">Action</th>
+            </tr>
+          </thead>
+          <tbody id="productRows"></tbody>
+        </table>
+      </div>
+
+      <div class="bottom-section">
+        <div class="notes">
+          <label class="no-print">Notes / Payment Terms
+            <textarea id="notes" rows="4" placeholder="Payment terms or bank details"></textarea>
+          </label>
+          <p id="printNotes" class="print-notes"></p>
+          <p class="disclaimer">
+            Please verify the applicable GST rate, HSN/SAC classification,
+            place of supply, and statutory invoice requirements before issuing.
+          </p>
+        </div>
+
+        <div class="totals">
+          <div><span>Taxable Value</span><b id="taxableTotal">₹0.00</b></div>
+          <div class="split-tax"><span>Total CGST</span><b id="cgstTotal">₹0.00</b></div>
+          <div class="split-tax"><span>Total SGST</span><b id="sgstTotal">₹0.00</b></div>
+          <div class="integrated-tax hidden"><span>Total IGST</span><b id="igstTotal">₹0.00</b></div>
+          <div class="grand-total"><span>Grand Total</span><b id="grandTotal">₹0.00</b></div>
+          <div><span>Rounded Payable</span><b id="roundedTotal">₹0.00</b></div>
+        </div>
+      </div>
+
+      <footer>Computer-generated invoice</footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #2457d6;
+  --dark: #172033;
+  --muted: #64748b;
+  --border: #dbe2ea;
+  --light: #f1f5f9;
+}
+
+body {
+  margin: 0;
+  background: #eef2f7;
+  color: var(--dark);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.toolbar {
+  max-width: 1500px;
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+h1 { margin: 0 0 8px; font-size: 27px; }
+h2 { margin-top: 0; }
+.toolbar p, .hint { color: var(--muted); }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary { background: var(--blue); color: white; }
+.secondary { background: #e4ebfc; color: #1e40af; }
+
+.app {
+  max-width: 1500px;
+  margin: auto;
+  padding: 0 24px 30px;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel, .invoice {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.panel {
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+}
+
+label {
+  display: block;
+  margin: 13px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: white;
+  color: var(--dark);
+  font: inherit;
+  min-width: 0;
+}
+
+input[type="file"] { font-size: 11px; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 22px 0;
+}
+
+.hint, .disclaimer {
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.invoice { min-width: 0; }
+
+.invoice-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--dark);
+}
+
+.company {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.company h2 { margin: 4px 0 8px; }
+.company p, .customer-section p { margin: 5px 0; overflow-wrap: anywhere; }
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1.4px;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.invoice-meta {
+  min-width: 130px;
+  font-size: 12px;
+}
+
+.invoice-meta p { margin: 0 0 12px; }
+.customer-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.customer-section h3 { margin: 6px 0; }
+
+.stamp-section {
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.stamp {
+  max-width: 130px;
+  max-height: 85px;
+  object-fit: contain;
+}
+
+.product-controls {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+}
+
+.product-controls label { margin: 0; }
+.product-controls select { min-width: 180px; }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 7px 5px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th {
+  background: var(--light);
+  font-size: 10px;
+}
+
+th:nth-child(2), td:nth-child(2),
+th:nth-child(3), td:nth-child(3) {
+  text-align: left;
+}
+
+td input, td select {
+  margin: 0;
+  padding: 6px 4px;
+  min-width: 60px;
+  font-size: 11px;
+}
+
+td .product-name { min-width: 120px; }
+td .hsn { min-width: 75px; }
+.remove-product { color: #b91c1c; background: #fee2e2; padding: 6px; }
+
+.bottom-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 25px;
+  padding-top: 22px;
+}
+
+.totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.totals span { color: #475569; }
+.totals b { white-space: nowrap; }
+
+.totals .grand-total {
+  background: var(--dark);
+  color: white;
+  padding: 13px;
+  border-radius: 7px;
+  margin: 8px 0;
+}
+
+.grand-total span { color: white; }
+
+.disclaimer { margin-top: 25px; color: var(--muted); }
+.print-notes { white-space: pre-wrap; }
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 22px;
+  padding-top: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 1050px) {
+  .app { grid-template-columns: 1fr; }
+  .panel { position: static; max-height: none; }
+}
+
+@media (max-width: 650px) {
+  .toolbar { padding: 18px 12px; flex-direction: column; align-items: flex-start; }
+  .app { padding: 0 10px 20px; }
+  .panel, .invoice { padding: 14px; }
+  .invoice-heading, .customer-section { flex-direction: column; }
+  .bottom-section { grid-template-columns: 1fr; }
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 8mm; }
+
+  body { background: white; font-size: 9px; }
+  .no-print { display: none !important; }
+  .app { display: block; max-width: none; margin: 0; padding: 0; }
+  .invoice { border: 0; padding: 0; border-radius: 0; }
+  .invoice-heading { padding-bottom: 10px; }
+  .customer-section { padding: 10px 0; }
+  .table-wrap { overflow: visible; }
+  table { font-size: 8px; }
+  th, td { padding: 4px 3px; }
+  td input, td select {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    appearance: none;
+    color: black;
+  }
+  .bottom-section { grid-template-columns: 1fr 230px; gap: 15px; }
+  .print-notes { white-space: pre-wrap; }
+  footer { margin-top: 12px; }
+}
